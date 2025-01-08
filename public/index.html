@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Healthcare Management System</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="#">
+            <img src="assets/logo.png" alt="HealthCare Plus Logo" height="60">
+            HealthCare Plus
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#map-section">Hospitals Near You</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#appointments-section">Appointments</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#health-records">Records</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+  </nav>
+
+  <section class="hero-section">
+    <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="carousel-content hospitals-slide">
+                    <h2>Find Nearby Hospitals</h2>
+                    <p>Discover the best healthcare facilities in your vicinity</p>
+                    <div class="feature-points">
+                        <ul>
+                            <li>Locate hospitals near you instantly</li>
+                            <li>View detailed hospital information</li>
+                            <li>Get directions to your chosen facility</li>
+                        </ul>
+                    </div>
+                    <a href="#map-section" class="btn btn-primary btn-lg">Find Hospitals</a>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="carousel-content appointments-slide">
+                    <h2>Easy Appointment Booking</h2>
+                    <p>Schedule your medical appointments hassle-free</p>
+                    <div class="feature-points">
+                        <ul>
+                            <li>Book appointments in just a few clicks</li>
+                            <li>Choose your preferred time slots</li>
+                            <li>Get instant confirmation</li>
+                        </ul>
+                    </div>
+                    <a href="#appointments-section" class="btn btn-primary btn-lg">Book Now</a>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="carousel-content records-slide">
+                    <h2>Digital Health Records</h2>
+                    <p>Keep track of your medical history securely</p>
+                    <div class="feature-points">
+                        <ul>
+                            <li>Store all your medical records digitally</li>
+                            <li>Access your history anytime, anywhere</li>
+                            <li>Share records securely with doctors</li>
+                        </ul>
+                    </div>
+                    <a href="#health-records" class="btn btn-primary btn-lg">View Records</a>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
+    </div>
+  </section>
+
+  <section class="hospitals-india-section">
+    <div class="container">
+        <div class="location-header">
+            <h2>LOCATION</h2>
+            <h3>Hospitals In India</h3>
+            <p class="location-description">
+                HealthCare Plus is one of the best hospital groups in India with over 10,000+ beds across 73+ hospitals, 6,000+ 
+                pharmacies, over 700+ clinics, 2,300+ diagnostic centres and 200+ Telemedicine units.
+            </p>
+        </div>
+
+        <div class="cities-grid">
+            <div class="city-card">
+                <img src="assets/ahmedabad_city.svg" alt="Ahmedabad Icon">
+                <span>Ahmedabad</span>
+            </div>
+            <div class="city-card">
+                <img src="assets/bangalore_city.svg" alt="Bangalore Icon">
+                <span>Bangalore</span>
+            </div>
+            <div class="city-card">
+                <img src="assets/chennai_city.svg" alt="Chennai Icon">
+                <span>Chennai</span>
+            </div>
+            <div class="city-card">
+                <img src="assets/delhi_city.svg" alt="Delhi Icon">
+                <span>Delhi</span>
+            </div>
+            <div class="city-card">
+                <img src="assets/hyderabad_city.svg" alt="Hyderabad Icon">
+                <span>Hyderabad</span>
+            </div>
+            <div class="city-card">
+                <img src="assets/kolkata_city.svg" alt="Kolkata Icon">
+                <span>Kolkata</span>
+            </div>
+            <div class="city-card">
+                <img src="assets/mumbai_city.svg" alt="Mumbai Icon">
+                <span>Mumbai</span>
+            </div>
+            <div class="city-card">
+                <img src="assets/lucknow_city.svg" alt="Lucknow Icon">
+                <span>Vishakapatnam</span>
+            </div>
+            
+        </div>
+    </div>
+  </section>
+
+  <main>
+    <section id="map-section">
+      <h2>Find Nearby Hospitals</h2>
+      <button id="find-hospitals-btn">Find Hospitals</button>
+      <ul id="hospital-list"></ul>
+      <div id="map-container">
+        <div id="map"></div>
+        <div id="hospital-details">
+          <div id="hospital-details-header">
+            <h3>Hospital Details</h3>
+          </div>
+          
+        </div>
+      </div>
+    </section>
+
+    <div id="appointment-form-section"></div>
+
+    <section id="appointments-section" class="container">
+        <h2 class="section-title">Book an Appointment</h2>
+        
+        <!-- Appointment Booking Form -->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="appointment-form-card">
+                    <h3>Schedule Your Visit</h3>
+                    <form id="appointment-form">
+                        <div class="mb-3">
+                            <label for="hospital-name" class="form-label">Hospital Name</label>
+                            <input type="text" class="form-control" id="hospital-name" 
+                                   list="hospital-suggestions" placeholder="Enter or select hospital">
+                            <datalist id="hospital-suggestions">
+                                <!-- Will be populated dynamically -->
+                            </datalist>
+                        </div>
+                        <div class="mb-3">
+                            <label for="patient-name" class="form-label">Patient Name</label>
+                            <input type="text" class="form-control" id="patient-name" required>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="appointment-date" class="form-label">Date</label>
+                                <input type="date" class="form-control" id="appointment-date" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="appointment-time" class="form-label">Time</label>
+                                <input type="time" class="form-control" id="appointment-time" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="reason" class="form-label">Reason for Visit</label>
+                            <textarea class="form-control" id="reason" rows="3"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Book Appointment</button>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Your Appointments List -->
+            <div class="col-md-6">
+                <div class="your-appointments-card">
+                    <h3>Your Appointments</h3>
+                    <div id="your-appointments">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="why-choose-us">
+      <div class="container">
+          <div class="section-header">
+              <img src="assets/logo.png" alt="HealthCare Plus Logo" height="150" class="mb-3">
+              <h2 class="section-title">Why Choose HealthCare Plus?</h2>
+          </div>
+          <p class="section-description">
+              Established with a vision of excellence, HealthCare Plus has a robust presence across the healthcare ecosystem. 
+              From routine wellness & preventive health care to innovative life-saving treatments and diagnostic services, 
+              we've touched millions of lives across the country.
+          </p>
+          
+          <div class="stats-grid">
+              <div class="stat-item">
+                  <div class="stat-icon">🏥</div>
+                  <div class="stat-number">50+</div>
+                  <div class="stat-text">Largest private healthcare network of Hospitals</div>
+              </div>
+              
+              <div class="stat-item">
+                  <div class="stat-icon">🏪</div>
+                  <div class="stat-number">500+</div>
+                  <div class="stat-text">Largest private network of clinics across India</div>
+              </div>
+              
+              <div class="stat-item">
+                  <div class="stat-icon">🔬</div>
+                  <div class="stat-number">1,500+</div>
+                  <div class="stat-text">Diagnostic centres across India</div>
+              </div>
+              
+              <div class="stat-item">
+                  <div class="stat-icon">💊</div>
+                  <div class="stat-number">4,000+</div>
+                  <div class="stat-text">Pharmacies</div>
+              </div>
+              
+              <div class="stat-item">
+                  <div class="stat-icon">👨‍⚕️</div>
+                  <div class="stat-number">8,000+</div>
+                  <div class="stat-text">Doctors</div>
+              </div>
+              
+              <div class="stat-item">
+                  <div class="stat-icon">🛏️</div>
+                  <div class="stat-number">7,000+</div>
+                  <div class="stat-text">Beds</div>
+              </div>
+          </div>
+      </div>
+    </section>
+
+    <section id="health-records">
+      <div id="medical-record-section">
+        <h2>📋 Health Records</h2>
+        <form id="record-form">
+          <div class="form-group">
+            <label for="record-date">Date</label>
+            <input type="date" id="record-date" required class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="record-type">Record Type</label>
+            <select id="record-type" required class="form-control">
+              <option value="">Select type</option>
+              <option value="General Checkup">General Checkup</option>
+              <option value="Lab Test">Lab Test</option>
+              <option value="Vaccination">Vaccination</option>
+              <option value="Prescription">Prescription</option>
+              <option value="Surgery">Surgery</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="doctor-name">Doctor's Name</label>
+            <input type="text" id="doctor-name" class="form-control" placeholder="Enter doctor's name">
+          </div>
+          <div class="form-group">
+            <label for="record-details">Details</label>
+            <textarea id="record-details" required class="form-control" 
+              placeholder="Enter health record details"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Save Record</button>
+        </form>
+        <div id="records-list">
+          <div class="records-filter">
+            <input type="text" id="search-records" class="form-control" 
+              placeholder="Search records...">
+            <select id="filter-type" class="form-control">
+              <option value="">All Types</option>
+              <option value="General Checkup">General Checkup</option>
+              <option value="Lab Test">Lab Test</option>
+              <option value="Vaccination">Vaccination</option>
+              <option value="Prescription">Prescription</option>
+              <option value="Surgery">Surgery</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div id="records-container" class="records-empty-state">
+            <div class="empty-state-content">
+                <div class="empty-icon">📋</div>
+                <h3>No Health Records Yet</h3>
+                <p>Start building your medical history by adding your first health record.</p>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addRecordModal">
+                    <i class="fas fa-plus"></i> Add Your First Record
+                </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Leaflet.js Library -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <!-- Your Custom JavaScript -->
+  <script src="js/app.js"></script>
+
+</body>
+</html>

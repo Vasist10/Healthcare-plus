@@ -170,6 +170,16 @@ document.getElementById("find-hospitals-btn").addEventListener("click", function
               .openPopup();
 
             // Add markers for each hospital found
+            data.elements.forEach(hospital => {
+                const hospitalLat = hospital.lat;
+                const hospitalLon = hospital.lon;
+                const hospitalName = hospital.tags.name || "Unnamed Hospital"; // Default name if no name is available
+                
+                L.marker([hospitalLat, hospitalLon])
+                  .addTo(map)
+                
+            });
+
             const hospitalDetailsDiv = document.getElementById("hospital-details");
             hospitalDetailsDiv.innerHTML = ""; // Clear previous results
             

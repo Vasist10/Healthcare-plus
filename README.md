@@ -21,16 +21,15 @@ Features:
   - iv)Cancel existing appointments.
 
 
-How to Run Locally
-Step 1: Clone the Repository
-git clone 
+How to Run Locally <br>
+Step 1: Clone the Repository to code editor.
 
 Step 2: Navigate to the Project Directory
-cd Healthcare-plus
+cd Healthcare-plus.
 
 Step 3: Install Dependencies
 Run the following commands to install the required dependencies for both backend and frontend:
-npm install
+<span style="color:red;">npm install.</span>
 
 Step 4: Set Up Environment Variables
 Create a .env file in the root of your project:
@@ -39,7 +38,7 @@ PORT=3000
 
 Step 5: Start the Backend Server
 To run the backend server, use:
-npm start
+<span style="color:red">npm start</span>
 This will start the Express server on http://localhost:3000.
 
 Step 6: Access the Application

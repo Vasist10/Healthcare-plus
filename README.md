@@ -7,18 +7,18 @@ Healthcare Management system
 Features:
 
 1)Nearby Hospital Locator
-  i)Allows users to find hospitals based on their current location (using geolocation).
-  ii)Displays hospitals within a certain radius (in the above code it is 20 km , it can be changed).
+  - i)Allows users to find hospitals based on their current location (using geolocation).
+  - ii)Displays hospitals within a certain radius (in the above code it is 20 km , it can be changed). 
 
 2)Access to Health Records
-  i)Users can view past medical records.
-  ii)Option to update or add new health records.
+  - i)Users can view past medical records.
+  - ii)Option to update or add new health records.
 
 3)Appointment Schedulling
-  i)Users can schedule appointments with hospitals.
-  ii)Form validations to ensure all required fields are filled.
-  iii)Option to display upcoming appointments.
-  iv)Cancel existing appointments.
+  - i)Users can schedule appointments with hospitals.
+  - ii)Form validations to ensure all required fields are filled.
+  - iii)Option to display upcoming appointments.
+  - iv)Cancel existing appointments.
 
 
 How to Run Locally
